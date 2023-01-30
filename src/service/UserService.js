@@ -28,4 +28,13 @@ const getAllUsers = async () => {
   }
 };
 
-export { userCreate, getAllUsers };
+const findIfEmailExists = async (email) => {
+  try {
+    const response = await User.findOne({ where: { email } });
+    return await response;
+  } catch (err) {
+    console.error("Failed to extract");
+  }
+};
+
+export { userCreate, getAllUsers, findIfEmailExists };

@@ -1,9 +1,8 @@
+import BadRequestException from "../errors/BadRequest.js";
 import PasswordHash from "../utils/Password_hash.js";
 
 const encryptPassword = async (req, res, next) => {
   const { password } = req.body;
-
-  console.log("Inside the middleware");
 
   const encryptedPassword = await PasswordHash.toHash(password);
 
