@@ -14,6 +14,12 @@ const User = sequalize.define("users", {
   lastName: {
     type: DataTypes.STRING,
   },
+  email: {
+    type: DataTypes.STRING,
+  },
+  password: {
+    type: DataTypes.STRING,
+  },
 });
 
 const sync = () => {
