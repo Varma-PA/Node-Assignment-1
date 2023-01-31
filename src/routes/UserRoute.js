@@ -1,12 +1,16 @@
 import { Router } from "express";
+import { checkEmailRegex } from "../middleware/EmailRegexMiddleware.js";
 import { encryptPassword } from "../middleware/EncryptPassword.js";
 import { findIfEmailExistsMiddleWare } from "../middleware/FindEmail.js";
+import { checkPasswordRegex } from "../middleware/PasswordRegexMiddleWare.js";
 import { userCreate, getAllUsers } from "../service/UserService.js";
 
 const router = Router();
 
 router.post(
   "/v1/user",
+  checkEmailRegex,
+  checkPasswordRegex,
   findIfEmailExistsMiddleWare,
   encryptPassword,
   async (request, response) => {
@@ -17,11 +21,6 @@ router.post(
     response.status(201).send(returnedData);
   }
 );
-
-// router.get("/", async (request, response) => {
-//   const returnedData = await getAllUsers();
-//   response.send(returnedData);
-// });
 
 router.get("/healthz", async (request, respond) => {
   respond.status(200).send();

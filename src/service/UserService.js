@@ -65,9 +65,9 @@ const updateTheGivenFields = async (body, id) => {
   } = body;
 
   if (
-    username !== null ||
-    account_creted !== null ||
-    account_updated !== null
+    username !== undefined ||
+    account_creted !== undefined ||
+    account_updated !== undefined
   ) {
     throw new BadRequestException(
       "You can't update other fields: username, account_created or account_updated"
