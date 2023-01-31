@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -38,5 +38,14 @@ jobs:
     needs: build
 
     steps:
+      - name: Print present working directory
+        run: pwd
+
+      - name: Looking at the list
+        run: ls -l
+
+      - name: Checking Npm versions
+        run: npm -v
+
       - name: Running the test cases
         run: npm test
