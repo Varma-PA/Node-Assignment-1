@@ -1,3 +1,4 @@
+import BadRequestException from "../errors/BadRequest.js";
 import { User } from "../Models/User.js";
 import PasswordHash from "../utils/Password_hash.js";
 
@@ -54,21 +55,33 @@ const findIfEmailExists = async (username) => {
 };
 
 const updateTheGivenFields = async (body, id) => {
-  const { first_name, last_name, username, password } = body;
+  const {
+    first_name,
+    last_name,
+    password,
+    username,
+    account_creted,
+    account_updated,
+  } = body;
 
-  console.log("Authenticated Body");
+  if (
+    username !== null ||
+    account_creted !== null ||
+    account_updated !== null
+  ) {
+    throw new BadRequestException(
+      "You can't update other fields: username, account_created or account_updated"
+    );
+  }
 
   const hashedPassword = await PasswordHash.toHash(password);
 
-  console.log("Inside Update The Given Fields");
-
   try {
-    await User.update(
+    const response = await User.update(
       {
         first_name,
         last_name,
         password: hashedPassword,
-        username,
         account_updated: Date.now(),
       },
       {
@@ -78,7 +91,7 @@ const updateTheGivenFields = async (body, id) => {
       }
     );
 
-    const response = await User.findByPk(id);
+    // const response = await User.findByPk(id);
 
     return await response;
   } catch (err) {

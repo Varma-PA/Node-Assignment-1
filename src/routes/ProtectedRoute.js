@@ -1,4 +1,5 @@
 import { Router } from "express";
+import CustomError from "../errors/CustomError.js";
 import ForbiddenAccess from "../errors/ForbiddenAccess.js";
 import { checkAuthorization } from "../middleware/CheckAuthorization.js";
 import { getUserById, updateTheGivenFields } from "../service/UserService.js";
@@ -28,9 +29,7 @@ router.put("/v1/user/:userId", checkAuthorization, async (req, res) => {
 
   const response = await updateTheGivenFields(req.body, req.params.userId);
 
-  delete response.dataValues["password"];
-
-  res.send(response);
+  res.status(204).send();
 });
 
 export { router as ProtectedRoutes };
