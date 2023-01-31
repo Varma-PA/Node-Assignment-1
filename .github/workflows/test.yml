@@ -29,23 +29,23 @@ jobs:
       - name: Installing Node Modules
         run: npm install
 
-      # - name: Running Test Cases
-      #   run: npm test
-
-  test:
-    runs-on: ubuntu-latest
-
-    needs: build
-
-    steps:
-      - name: Print present working directory
-        run: pwd
-
-      - name: Looking at the list
-        run: ls
-
-      - name: Checking Npm versions
-        run: npm -v
-
-      - name: Running the test cases
+      - name: Running Test Cases
         run: npm test
+
+  # test:
+  #   runs-on: ubuntu-latest
+
+  #   needs: build
+
+  #   steps:
+  #     - name: Print present working directory
+  #       run: pwd
+
+  #     - name: Looking at the list
+  #       run: ls
+
+  #     - name: Checking Npm versions
+  #       run: npm -v
+
+  #     - name: Running the test cases
+  #       run: npm test
