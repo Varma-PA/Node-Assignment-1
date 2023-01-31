@@ -42,7 +42,7 @@ jobs:
         run: pwd
 
       - name: Looking at the list
-        run: ls -l
+        run: ls
 
       - name: Checking Npm versions
         run: npm -v
