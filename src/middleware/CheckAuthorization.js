@@ -30,7 +30,9 @@ const checkAuthorization = async (req, res, next) => {
     if (!match) throw new NotAuthorizedError("Invalid Password");
   }
 
-  req.response = response;
+  console.log("Completed with the updation");
+
+  req.response = response.dataValues;
 
   next();
 };
