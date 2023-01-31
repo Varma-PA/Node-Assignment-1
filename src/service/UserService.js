@@ -91,8 +91,6 @@ const updateTheGivenFields = async (body, id) => {
       }
     );
 
-    // const response = await User.findByPk(id);
-
     return await response;
   } catch (err) {
     console.error("Failed To Extract");
