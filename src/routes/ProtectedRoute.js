@@ -14,7 +14,7 @@ const router = Router();
 router.get("/v1/user/:userId", checkAuthorization, async (req, res) => {
   const userDetails = await getUserById(req.params.userId);
 
-  delete userDetails["password"];
+  delete userDetails.dataValues["password"];
 
   res.status(200).send(userDetails);
 });
