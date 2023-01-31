@@ -1,5 +1,6 @@
 import NotAuthorizedError from "../errors/NotAuthorized.js";
 import { findIfEmailExists } from "../service/UserService.js";
+import PasswordHash from "../utils/Password_hash.js";
 
 const checkAuthorization = async (req, res, next) => {
   const { authorization } = req.headers;
@@ -12,14 +13,21 @@ const checkAuthorization = async (req, res, next) => {
 
   console.log("This is the Authorized Code: " + authorizationToken);
 
-  const email = Buffer.from(authorizationToken, "base64").toString();
+  const stringValue = Buffer.from(authorizationToken, "base64").toString();
 
-  console.log("This is the email " + email);
+  const [username, password] = stringValue.split(":");
 
-  const response = await findIfEmailExists(email);
+  const response = await findIfEmailExists(username);
 
   if (response === null) {
-    throw new NotAuthorizedError("Invalid Email or Password");
+    throw new NotAuthorizedError("Invalid Email");
+  } else {
+    const match = await PasswordHash.comparePassword(
+      password,
+      response.password
+    );
+
+    if (!match) throw new NotAuthorizedError("Invalid Password");
   }
 
   req.response = response;

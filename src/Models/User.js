@@ -1,26 +1,38 @@
 import { DataTypes } from "sequelize";
 import { sequalize } from "../db/Sequalize.js";
 
-const User = sequalize.define("users", {
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
+const User = sequalize.define(
+  "users",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    first_name: {
+      type: DataTypes.STRING,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+    },
+    username: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+    },
+    account_created: {
+      type: DataTypes.DATE,
+    },
+    account_updated: {
+      type: DataTypes.DATE,
+    },
   },
-  firstName: {
-    type: DataTypes.STRING,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-  },
-  email: {
-    type: DataTypes.STRING,
-  },
-  password: {
-    type: DataTypes.STRING,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 const sync = () => {
   sequalize

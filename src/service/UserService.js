@@ -1,19 +1,34 @@
 import { User } from "../Models/User.js";
 
 const userCreate = async (body) => {
-  const { firstName, lastName, email, password } = body;
+  const { first_name, last_name, username, password } = body;
+
+  const account_created = Date.now();
+
+  const account_updated = Date.now();
 
   try {
     const response = await User.create({
-      firstName,
-      lastName,
-      email,
+      first_name,
+      last_name,
+      username,
       password,
+      account_created,
+      account_updated,
     });
 
     return await response;
   } catch (err) {
-    console.log("Failed to create");
+    console.error("Failed to create");
+  }
+};
+
+const getUserById = async (userId) => {
+  try {
+    const response = await User.findByPk(userId);
+    return await response;
+  } catch (err) {
+    console.error("Failed to Extract by Id: " + err);
   }
 };
 
@@ -24,17 +39,19 @@ const getAllUsers = async () => {
     });
     return await response;
   } catch (err) {
-    console.log("Failed to extract");
+    console.error("Failed to extract");
   }
 };
 
-const findIfEmailExists = async (email) => {
+const findIfEmailExists = async (username) => {
   try {
-    const response = await User.findOne({ where: { email } });
+    const response = await User.findOne({ where: { username } });
     return await response;
   } catch (err) {
     console.error("Failed to extract");
   }
 };
 
-export { userCreate, getAllUsers, findIfEmailExists };
+const updateTheGivenFields = async (body) => {};
+
+export { userCreate, getAllUsers, findIfEmailExists, getUserById };
