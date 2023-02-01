@@ -16,15 +16,6 @@ const checkEmailRegex = async (req, res, next) => {
     throw new InvalidEmail("Please give valid email");
   }
 
-  //   // Min 8 Characters, At least one letter and one number
-  //   const passwordRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,}$/);
-
-  //   if (!passwordRegex.test(password) || password === "") {
-  //     throw new BadRequestException(
-  //       "Please give valid english alphabet and one number in the password with min length of 3"
-  //     );
-  //   }
-
   next();
 };
 
