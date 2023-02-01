@@ -1,14 +1,16 @@
 import { Router } from "express";
+import { emptyContent } from "../middleware/CheckIfEmptyContent.js";
 import { checkEmailRegex } from "../middleware/EmailRegexMiddleware.js";
 import { encryptPassword } from "../middleware/EncryptPassword.js";
 import { findIfEmailExistsMiddleWare } from "../middleware/FindEmail.js";
 import { checkPasswordRegex } from "../middleware/PasswordRegexMiddleWare.js";
-import { userCreate, getAllUsers } from "../service/UserService.js";
+import { userCreate } from "../service/UserService.js";
 
 const router = Router();
 
 router.post(
   "/v1/user",
+  emptyContent,
   checkEmailRegex,
   checkPasswordRegex,
   findIfEmailExistsMiddleWare,

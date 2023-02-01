@@ -11,8 +11,6 @@ const checkAuthorization = async (req, res, next) => {
 
   const authorizationToken = authorization.split(" ")[1];
 
-  console.log("This is the Authorized Code: " + authorizationToken);
-
   const stringValue = Buffer.from(authorizationToken, "base64").toString();
 
   const [username, password] = stringValue.split(":");
@@ -29,8 +27,6 @@ const checkAuthorization = async (req, res, next) => {
 
     if (!match) throw new NotAuthorizedError("Invalid Password");
   }
-
-  console.log("Completed with the updation");
 
   req.response = response.dataValues;
 
