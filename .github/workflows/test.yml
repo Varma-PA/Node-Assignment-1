@@ -25,7 +25,6 @@ jobs:
         with:
           # node-version: ${{ matrix.node-version }}
           node-version: 16.x
-          cache: "npm"
 
       - name: Installing Node Modules
         run: npm install
